@@ -1,0 +1,118 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="container">
+    <form class="form-signin" method="post" id="search-form">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input class="form-control" asp-for="Name" autofocus>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <select asp-for="GenderId" asp-items="Model.Genders" class="form-control"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>City</label>
+                        <select asp-for="CityId" asp-items="Model.Cities" class="form-control"></select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Region</label>
+                        <select asp-for="RegionId" asp-items="Model.Regions" class="form-control"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Last Purchase</label>
+                        <input class="form-control" asp-for="LastPurchaseStart" type="date">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>until</label>
+                        <input class="form-control" asp-for="LastPurchaseEnd" type="date">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Classification</label>
+                        <select asp-for="ClassificationId" asp-items="Model.Classifications" class="form-control"></select>
+                    </div>
+                </div>
+                @if (Model.IsAdministrator)
+                {
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Seller</label>
+                            <select asp-for="SellerId" asp-items="Model.Sellers" class="form-control"></select>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="row form-group">
+                <div class="col-md-6">
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" asp-page-handler="">Search</button>
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-lg btn-secondary btn-block" type="button" onclick="$('#search-form').find('input[type=text], textarea, select').val('');">Clear Fields</button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Classification</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">City</th>
+                    <th scope="col">Region</th>
+                    <th scope="col">Last Purchase</th>
+                    @if (Model.IsAdministrator)
+                    {
+                        <th scope="col">Seller</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var searchResult in Model.Results)
+                {
+                    <tr>
+                        <td>@searchResult.Classification</td>
+                        <td>@searchResult.Name</td>
+                        <td>@searchResult.Phone</td>
+                        <td>@searchResult.Gender</td>
+                        <td>@searchResult.City</td>
+                        <td>@searchResult.Region</td>
+                        <td>@searchResult.LastPurchase</td>
+                        @if (Model.IsAdministrator)
+                        {
+                            <td>@searchResult.Seller</td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

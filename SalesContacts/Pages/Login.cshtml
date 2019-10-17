@@ -1,0 +1,39 @@
+﻿@page
+@model SalesContacts.Pages.LoginModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = null;
+}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" />
+
+<style>
+    html,
+    body {
+        height: 100%
+    }
+
+    .input-validation-error {
+        border-color: red !important;
+    }
+
+    .validation-summary-errors {
+        color: red;
+    }
+</style>
+
+<div class="h-100 row align-items-center justify-content-center">
+    <form class="form-signin" method="post">
+        @Html.ValidationSummary()
+        <label for="inputEmail" class="sr-only">Email</label>
+        <input id="inputEmail" class="form-control" placeholder="Email address" asp-for="Email" autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" asp-for="Password">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+    </form>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
